@@ -14,6 +14,7 @@ class KuaijianAdmin(object):
 	ordering = ("-upTime",)
 	list_filter=('place','upTime','songda')#该属性指定可以过滤的列的名字, 系统会自动生成搜索器
 	search_fields=('name','place','bianhao')#属性指定可以通过搜索框搜索的数据列的名字, 搜索框搜索使用的是模糊查找的方式, 一般用来搜素名字等字符串字段
+	list_export = ('xls', 'xml', 'json')#该插件在数据列表页面提供了数据导出功能, 可以导出 Excel, CSV, XML, json 格式.
 	
 
 
