@@ -3,8 +3,14 @@
 
 # Register your models here.
 import xadmin
+
 from models import Kuaijian,Songda,MyCounter
 
+from xadmin import views
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+xadmin.site.register(views.BaseAdminView,BaseSetting)
 
 class KuaijianAdmin(object):
 	#search_fields=('name','category','content')

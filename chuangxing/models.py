@@ -1,7 +1,8 @@
 #-*- coding: UTF-8 -*- 
 from django.db import models
 
-# Create your models here.
+# Create your models here
+
 class Kuaijian(models.Model):
             b=((u'已送达',u'已送达'),(u'未送达',u'未送达'))
             songda=models.CharField(u'送达',max_length=20,choices=b,default=u'未送达')
