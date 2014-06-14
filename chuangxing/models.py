@@ -19,6 +19,18 @@ class Kuaijian(models.Model):
 		verbose_name_plural=u'快件'
 		ordering=['-upTime']
 
+class MyCounter(models.Model):
+    upcount=models.IntegerField()
+    songdacount=models.IntegerField()
+    date=models.DateField()
+
+    class Meta:
+        verbose_name_plural=u'快件计数器'
+        ordering=['-date']
+        
+
+
+
 
 '''
 Action 插件在数据列表页面提供了数据选择功能, 
