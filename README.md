@@ -201,3 +201,13 @@ class MyModelAdmin(object):
     
     list_editable = ['price', 'status', ...]
 ```
+
+### 8.改主题的插件
+`adminx.py`中加入下面代码即可
+```
+from xadmin import views
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+xadmin.site.register(views.BaseAdminView,BaseSetting)
+```
