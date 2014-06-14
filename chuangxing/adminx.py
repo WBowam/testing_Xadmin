@@ -15,7 +15,10 @@ class KuaijianAdmin(object):
 	list_filter=('place','upTime','songda')#该属性指定可以过滤的列的名字, 系统会自动生成搜索器
 	search_fields=('name','place','bianhao')#属性指定可以通过搜索框搜索的数据列的名字, 搜索框搜索使用的是模糊查找的方式, 一般用来搜素名字等字符串字段
 	list_export = ('xls', 'xml', 'json')#该插件在数据列表页面提供了数据导出功能, 可以导出 Excel, CSV, XML, json 格式.
-	
+	# 这会显示一个下拉列表, 用户可以选择3秒或5秒刷新一次页面.
+	refresh_times = (3, 5,500)
+	list_editable = ('name')
+	show_detail_fields = ['name',]#该插件可以在列表页中显示相关字段的详细信息, 使用 Ajax 在列表页中显示.
 
 
 class MyCounterAdmin(object):
