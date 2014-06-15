@@ -1,5 +1,6 @@
 #-*- coding: UTF-8 -*- 
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 # Create your models here
 
@@ -8,7 +9,7 @@ class Kuaijian(models.Model):
             songda=models.CharField(u'送达',max_length=20,choices=b,default=u'未送达')
             bianhao=models.CharField(max_length=30,unique=True)
             name=models.CharField(max_length=100)
-            description=models.TextField(blank=True)
+            description=UEditorField(u'内容',height=100,width=500,default='test',imagePath="uploadimg/",imageManagerPath="imglib",toolbars='large',options={"elementPathEnabled":True},filePath='upload',blank=True)
             upTime=models.DateTimeField(u'上传时间',auto_now_add=True)
             c=((u'服务中心',u'服务中心'),(u'北门',u'北门'),(u'南门',u'南门'))
             place=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
