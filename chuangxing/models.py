@@ -1,5 +1,6 @@
 #-*- coding: UTF-8 -*- 
 from django.db import models
+from django.contrib.auth.models import User
 #from DjangoUeditor.models import UEditorField
 
 # Create your models here
@@ -15,10 +16,11 @@ class Kuaijian(models.Model):
             sourcePosition=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
             destinationPosition=models.CharField(u'送货地点',max_length=500)
             name=models.CharField(u'收件人名字',max_length=200)
+            upUser=models.ForeignKey(User)
             getBeginTime=models.DateTimeField(u'快件代取时间(开始)')
             getEndTime=models.DateTimeField(u'快件代取时间(结束)')
             h=((u'当日',u'当日'),(u'两天内',u'两天内'),(u'三天内',u'三天内'))
-            deadLine=models.CharField(u'代取情况',max_length=20,choices=h,default=u'当日')
+            deadLine=models.CharField(u'快件配送期限',max_length=20,choices=h,default=u'当日')
             #postBeginTime=models.DateTimeField(u'快件送货时间(开始)')
             #postEndTime=models.DateTimeField(u'快件送货时间(结束)')
             #bianhao=models.CharField(max_length=30,unique=True)
