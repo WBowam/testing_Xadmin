@@ -14,6 +14,8 @@ xadmin.site.register(views.BaseAdminView,BaseSetting)
 
 class KuaijianAdmin(object):
 	#search_fields=('name','category','content')
+	#prepopulated_fields = { 'message': ['name'] }##learned at  http://www.b-list.org/weblog/2008/dec/24/admin/
+	exclude = ('created_by',)
 	actions = [Songda, ]
 	list_display = ('name',)
 	list_display_links = ('name',)
@@ -26,6 +28,10 @@ class KuaijianAdmin(object):
 	list_editable = ('delivered')
 	show_detail_fields = ['message',]#该插件可以在列表页中显示相关字段的详细信息, 使用 Ajax 在列表页中显示.
 
+
+	def save_models(self):
+		self.new_obj.created_by=self.request.user
+		self.new_obj.save()
 
 class MyCounterAdmin(object):
 	data_charts ={

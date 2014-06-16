@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 #from DjangoUeditor.models import UEditorField
-
+import datetime
 # Create your models here
 
 class Kuaijian(models.Model):
@@ -15,9 +15,10 @@ class Kuaijian(models.Model):
             c=((u'服务中心',u'服务中心'),(u'北门',u'北门'),(u'南门',u'南门'))
             sourcePosition=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
             destinationPosition=models.CharField(u'送货地点',max_length=500)
-            name=models.CharField(u'收件人名字',max_length=200)
-            upUser=models.ForeignKey(User)
-            getBeginTime=models.DateTimeField(u'快件代取时间(开始)')
+            name=models.CharField(u'收件人名字 ',max_length=200,blank=True)
+            #upUser=models.ForeignKey(User)
+            created_by = models.ForeignKey(User)
+            getBeginTime=models.DateTimeField(u'快件代取时间(开始)',default=datetime.datetime.now)
             getEndTime=models.DateTimeField(u'快件代取时间(结束)')
             h=((u'当日',u'当日'),(u'两天内',u'两天内'),(u'三天内',u'三天内'))
             deadLine=models.CharField(u'快件配送期限',max_length=20,choices=h,default=u'当日')
@@ -36,6 +37,8 @@ class Kuaijian(models.Model):
             class Meta:
                  verbose_name_plural=u'快件'
 	    ordering=['-upTime']
+
+
 
 class MyCounter(models.Model):
             upcount=models.IntegerField()
