@@ -1,18 +1,34 @@
 #-*- coding: UTF-8 -*- 
 from django.db import models
-from DjangoUeditor.models import UEditorField
+#from DjangoUeditor.models import UEditorField
 
 # Create your models here
 
 class Kuaijian(models.Model):
             b=((u'已送达',u'已送达'),(u'未送达',u'未送达'))
-            songda=models.CharField(u'送达',max_length=20,choices=b,default=u'未送达')
-            bianhao=models.CharField(max_length=30,unique=True)
-            name=models.CharField(max_length=100)
-            description=UEditorField(u'内容',height=100,width=500,default='test',imagePath="uploadimg/",imageManagerPath="imglib",toolbars='large',options={"elementPathEnabled":True},filePath='upload',blank=True)
-            upTime=models.DateTimeField(u'上传时间',auto_now_add=True)
+            delivered=models.CharField(u'送达情况',max_length=20,choices=b,default=u'未送达')
+            f=((u'已代取',u'已代取'),(u'未代取',u'未代取'))
+            bought=models.CharField(u'代取情况',max_length=20,choices=f,default=u'未代取')
+            a=((u'圆通',u'圆通'),(u'EMS',u'EMS'),(u'汇通',u'汇通'),(u'申通',u'申通'),(u'圆通',u'圆通'),(u'顺丰',u'顺丰'))
+            express=models.CharField(u'快递公司',max_length=100,choices=a,default=u'申通')
             c=((u'服务中心',u'服务中心'),(u'北门',u'北门'),(u'南门',u'南门'))
-            place=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
+            sourcePosition=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
+            destinationPosition=models.CharField(u'送货地点',max_length=500)
+            name=models.CharField(u'收件人名字',max_length=200)
+            getBeginTime=models.DateTimeField(u'快件代取时间(开始)')
+            getEndTime=models.DateTimeField(u'快件代取时间(结束)')
+            h=((u'当日',u'当日'),(u'两天内',u'两天内'),(u'三天内',u'三天内'))
+            deadLine=models.CharField(u'代取情况',max_length=20,choices=h,default=u'当日')
+            #postBeginTime=models.DateTimeField(u'快件送货时间(开始)')
+            #postEndTime=models.DateTimeField(u'快件送货时间(结束)')
+            #bianhao=models.CharField(max_length=30,unique=True)
+            d=((u'小于1公斤重',u'小于1公斤重'),(u'小于5公斤重',u'小于5公斤重'),(u'小于10公斤重',u'小于10公斤重'),(u'小于50公斤重',u'小于50公斤重'))
+            goodsWeight=models.CharField(u'快件重量',max_length=50,choices=d,default='小于1公斤重',blank=True)
+            e=((u'信件',u'信件'),(u'书籍',u'书籍'),(u'衣服',u'衣服'),(u'鞋子',u'鞋子'),(u'其他',u'其他'))
+            goodsVariety=models.CharField(u'快件种类',max_length=50,choices=e,default='信件',blank=True)
+            message=models.TextField(u'备注',blank=True)
+            upTime=models.DateTimeField(u'上传时间',auto_now_add=True)
+            
             def __unicode__(self):
                 return ("%s--- %s"%(self.name,self.upTime))
             class Meta:
@@ -55,7 +71,7 @@ class Songda(BaseActionView):
             # queryset 是包含了已经选择的数据的 queryset
             for obj in queryset:
                 # obj 的操作
-                obj.songda='已送达'
+                obj.delivered='已送达'
                 obj.save()
             # 返回 HttpResponse
             #return HttpResponseRedirect('/%s'%self.admin_site.name.app)
