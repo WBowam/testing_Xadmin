@@ -3,11 +3,11 @@ from django.contrib import admin
 from models import Kuaijian
 
 class KuaijianAdmin(admin.ModelAdmin):
-	#exclude = ('author',)
+	exclude = ('created_by',)
 
 	def save_model(self, request, obj, form, change):
 	    if not change:
-	        obj.name = request.user
+	        obj.created_by = request.user
 	    obj.save()
 
 
