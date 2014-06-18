@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "accounts.myprofile", "fields": {"favourite_snack": "hhh", "user": 1, "mugshot": "mugshots/fe68f8aa28.jpg", "privacy": "registered"}}, {"pk": 2, "model": "accounts.myprofile", "fields": {"favourite_snack": "kkk", "user": 2, "mugshot": "", "privacy": "registered"}}]

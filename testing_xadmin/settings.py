@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'guardian',  
     'easy_thumbnails',
     'accounts',
+    'django_reset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'db',
         #'ATOMIC_REQUESTS': True
-        'USER' :'root',      # Not used with sqlite3.,
+        'USER' :'tulpar',      # Not used with sqlite3.,
         'PASSWORD' : 'qwe',         # Not used with sqlite3.
         'HOST' : '',           # Set to empty string for localhost. Not used with sqlite3.
         'PORT' : '',            # Set to empty string for default. Not used with sqlite3.
