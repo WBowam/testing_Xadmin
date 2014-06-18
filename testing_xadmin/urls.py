@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 
     url(r'^xadmin/', include(xadmin.site.urls), name='xadmin'),
     url(r'^admin/', include(admin.site.urls), name='admin'),
+    ##for userena
+    (r'^accounts/', include('userena.urls')),
 )
 
 
@@ -24,3 +26,11 @@ from django.conf import settings
 urlpatterns += patterns('',
 	url(r"^static/(?P<path>.*)$","django.views.static.serve",{"document_root": settings.STATIC_ROOT,}),
 	)
+
+
+##added by Tulpar,20140514
+#from django.conf import settings
+
+urlpatterns += patterns('',
+    url(r"^media/(?P<path>.*)$","django.views.static.serve",{"document_root": settings.MEDIA_ROOT,}),
+)

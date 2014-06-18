@@ -47,6 +47,11 @@ INSTALLED_APPS = (
 
     ##For Chuangxing Test
     'chuangxing',
+    ##added by Tulpar for  Userena,20140617
+    'userena',
+    'guardian',  
+    'easy_thumbnails',
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,18 +70,31 @@ WSGI_APPLICATION = 'testing_xadmin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ATOMIC_REQUESTS': True
     }
 }
+'''
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'db',
+        #'ATOMIC_REQUESTS': True
+        'USER' :'root',      # Not used with sqlite3.,
+        'PASSWORD' : 'qwe',         # Not used with sqlite3.
+        'HOST' : '',           # Set to empty string for localhost. Not used with sqlite3.
+        'PORT' : '',            # Set to empty string for default. Not used with sqlite3.
+    }
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'zh'
+LANGUAGE_CODE = 'EN'
 
 TIME_ZONE = 'UTC'
 
@@ -102,3 +120,35 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static/ueditor'),
     )
 
+#import os
+#settings_dir = os.path.dirname(__file__)
+#PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media/')
+MEDIA_URL = '/media/'
+
+
+##added by Tulpar for  Userena,20140617
+
+AUTHENTICATION_BACKENDS = (
+        'userena.backends.UserenaAuthenticationBackend',
+        'guardian.backends.ObjectPermissionBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+ANONYMOUS_USER_ID = -1
+
+
+AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tulpar010@gmail.com'
+EMAIL_HOST_PASSWORD = 'TEST818TEST'
