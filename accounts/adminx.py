@@ -1,5 +1,4 @@
 #-*- coding: UTF-8 -*- 
-#from django.contrib import admin
 
 # Register your models here.
 import xadmin
@@ -11,8 +10,9 @@ class MyProfileAdmin(object):
 	#prepopulated_fields = { 'message': ['name'] }##learned at  http://www.b-list.org/weblog/2008/dec/24/admin/
 	#exclude = ('created_by',)
 	#actions = [Songda, ]
-	list_display = ('user','favourite_snack')
-	list_display_links = ('user',)
+	
+	list_display = ('user','favourite_snack','image_img')
+	list_display_links = ('user','image_img')
 	ordering = ("-user",)
 	list_filter=('user',)#该属性指定可以过滤的列的名字, 系统会自动生成搜索器
 	search_fields=('user',)#属性指定可以通过搜索框搜索的数据列的名字, 搜索框搜索使用的是模糊查找的方式, 一般用来搜素名字等字符串字段

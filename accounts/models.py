@@ -18,3 +18,11 @@ class MyProfile(UserenaBaseProfile):
     student_number=models.CharField(u'学号',max_length=100,blank=True)
     one_card=models.FileField(u'一卡通',null=True,blank=True,upload_to='onecard')
     favourite_snack = models.CharField(_('favourite snack'),max_length=5)
+
+    def image_img(self):
+        if self.mugshot:
+            return str('<img src="%s" />' % self.mugshot.url)
+        else:
+            return u'上传头像'
+    image_img.short_description = '头像'
+    image_img.allow_tags = True
