@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from userena.models import UserenaBaseProfile
+##for img ,upload,resize
+from stdimage import StdImageField
 
 class MyProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,unique=True,verbose_name=_('user'),related_name='my_profile')
@@ -16,12 +18,13 @@ class MyProfile(UserenaBaseProfile):
     address=models.CharField(u'住址',max_length=100,blank=True)
     identity_card=models.CharField(u'身份证',max_length=100,blank=True)
     student_number=models.CharField(u'学号',max_length=100,blank=True)
-    one_card=models.FileField(u'一卡通',null=True,blank=True,upload_to='onecard')
+    #one_card=models.FileField(u'一卡通',null=True,blank=True,upload_to='onecard')
+    one_card=StdImageField(upload_to='onecard', variations={'thumbnail': (100, 75)}) # creates a thumbnail resized to maximum size to fit a 100x75 area
     favourite_snack = models.CharField(_('favourite snack'),max_length=5)
 
     def image_img(self):
-        if self.mugshot:
-            return str('<img src="%s" />' % self.mugshot.url)
+        if self.one_card:
+            return str('<img src="%s" />' % self.one_card.thumbnail.url)
         else:
             return u'上传头像'
     image_img.short_description = '头像'

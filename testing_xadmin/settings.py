@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'accounts',
     'django_reset',
+    ###for img, upload ,resize
+    'stdimage',
 )
 
 MIDDLEWARE_CLASSES = (
