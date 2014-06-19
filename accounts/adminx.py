@@ -11,8 +11,8 @@ class MyProfileAdmin(object):
 	#exclude = ('created_by',)
 	#actions = [Songda, ]
 	
-	list_display = ('user','image_img')
-	list_display_links = ('user','image_img')
+	list_display = ('user','image_img','image_img2')
+	list_display_links = ('user','image_img','image_img2')
 	ordering = ("-user",)
 	list_filter=('user',)#该属性指定可以过滤的列的名字, 系统会自动生成搜索器
 	search_fields=('user',)#属性指定可以通过搜索框搜索的数据列的名字, 搜索框搜索使用的是模糊查找的方式, 一般用来搜素名字等字符串字段
