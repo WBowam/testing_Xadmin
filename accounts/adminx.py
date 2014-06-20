@@ -3,6 +3,7 @@
 # Register your models here.
 import xadmin
 
+#############################################################################
 from models import MyProfile
 
 class MyProfileAdmin(object):
@@ -22,4 +23,16 @@ class MyProfileAdmin(object):
 	list_editable = ('favourite_snack')
 	show_detail_fields = ['user',]#该插件可以在列表页中显示相关字段的详细信息, 使用 Ajax 在列表页中显示.
 
+	
 xadmin.site.register(MyProfile,MyProfileAdmin)
+
+
+
+#############################################################################
+from models import ReceiveAddress
+
+class ReceiveAddressAdmin(object):
+	list_display = ('building',)
+	list_display_links = ('user',)
+
+xadmin.site.register(ReceiveAddress,ReceiveAddressAdmin)

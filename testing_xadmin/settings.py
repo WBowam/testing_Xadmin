@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -86,7 +86,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'db',
+        'NAME':'chuangxing_db',
         #'ATOMIC_REQUESTS': True
         'USER' :'tulpar',      # Not used with sqlite3.,
         'PASSWORD' : 'qwe',         # Not used with sqlite3.

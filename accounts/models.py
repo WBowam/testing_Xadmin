@@ -7,21 +7,26 @@ from django.utils.translation import ugettext as _
 from userena.models import UserenaBaseProfile
 ##for img ,upload,resize
 from stdimage import StdImageField
+##for phone
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 class MyProfile(UserenaBaseProfile):
-    courier=models.BooleanField(u'快递员',default=False)
+    user_state_CHOICES=((u'普通用户',u'普通用户'),(u'高级用户',u'高级用户'),(u'快递人',u'快递人'))
+    user_state=models.CharField(u'用户状态',max_length=20,choices=user_state_CHOICES,default=u'普通用户')
     user = models.OneToOneField(User,unique=True,verbose_name=_('user'),related_name='my_profile')
     GENDER_CHOICES = ((1, _('Male')),(2, _('Female')),)
     gender = models.PositiveSmallIntegerField(_('gender'),choices=GENDER_CHOICES,blank=True,null=True)
     date_joined=models.DateTimeField(u'注册时间',auto_now_add=True)
-    eal_name=models.CharField(u'真实姓名',max_length=100,blank=True)
-    major=models.CharField(u'专业',max_length=100,blank=True)
+    real_name=models.CharField(u'真实姓名',max_length=100,blank=True)
+    #major=models.CharField(u'专业',max_length=100,blank=True)
     address=models.CharField(u'住址',max_length=100,blank=True)
-    identity_card=models.CharField(u'身份证',max_length=100,blank=True)
-    student_number=models.CharField(u'学号',max_length=100,blank=True)
+    #phone=models.PositiveSmallIntegerField()
+    phone = models.CharField(max_length=11, unique=True, blank=True,validators=[RegexValidator(regex='^\d{11}$', message='请输入正确的手机号', code='Invalid number')])
+    #identity_card=models.CharField(u'身份证',max_length=100,blank=True)
+   # student_number=models.CharField(u'学号',max_length=100,blank=True)
     #one_card=models.FileField(u'一卡通',null=True,blank=True,upload_to='onecard')
     one_card=StdImageField(u'一卡通',upload_to='onecard', variations={'thumbnail': (100, 75)},blank=True) # creates a thumbnail resized to maximum size to fit a 100x75 area
-    #favourite_snack = models.CharField(_('favourite snack'),max_length=5)
 
     def image_img(self):
         if self.one_card:
@@ -42,3 +47,16 @@ class MyProfile(UserenaBaseProfile):
         verbose_name_plural=u'个人资料'
         #app_label=u'助学贷款'
         ordering=["-date_joined"]
+
+
+class ReceiveAddress(models.Model):
+    campus_CHOICES=((u'华电二校',u'华电二校'))
+    campus=models.CharField(u'校区',choices=campus_CHOICES,max_length=20,default=u'华电二校')
+    buildings_CHOICES=((u'6舍',u'6舍'),(u'7舍',u'7舍'),(u'8舍',u'8舍'),(u'9舍',u'9舍'),(u'10舍',u'10舍'),(u'11舍',u'11舍'),(u'12舍',u'12舍'),(u'13舍',u'13舍'),(u'15舍',u'15舍'),(u'16舍',u'16舍'),(u'17舍',u'17舍'),(u'18舍',u'18舍'))
+    buildings=models.CharField(u'楼宇',choices=campus_CHOICES,max_length=20,default=u'华电二校')
+    room=models.CharField(u'房间',max_length=5,balnk=True)
+    
+    class Meta:
+        verbose_name_plural=u'收货地址'
+        #app_label=u'助学贷款'
+        #ordering=["-date_joined"]
