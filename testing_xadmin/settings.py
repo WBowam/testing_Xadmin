@@ -33,7 +33,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    #'django.contrib.admin',
+    ###############follow for  TESTING django-admin-tools
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+    #'django.contrib.auth',
+    'django.contrib.sites',
+    #'django.contrib.admin'
+    ###############above for  TESTING django-admin-tools
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -155,3 +164,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tulpar010@gmail.com'
 EMAIL_HOST_PASSWORD = 'TEST818TEST'
+
+

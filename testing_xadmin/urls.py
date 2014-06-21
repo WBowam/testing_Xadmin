@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
-#from django.contrib import admin
-#admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 import xadmin
 xadmin.autodiscover()
 
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^xadmin/', include(xadmin.site.urls), name='xadmin'),
-    #url(r'^admin/', include(admin.site.urls), name='admin'),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
     ##for userena
     (r'^accounts/', include('userena.urls')),
 )

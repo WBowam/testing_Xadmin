@@ -32,7 +32,7 @@ xadmin.site.register(MyProfile,MyProfileAdmin)
 from models import ReceiveAddress
 
 class ReceiveAddressAdmin(object):
-	list_display = ('building',)
-	list_display_links = ('user',)
+	list_display = ('buildings',)
+	list_display_links = ('buildings',)
 
 xadmin.site.register(ReceiveAddress,ReceiveAddressAdmin)

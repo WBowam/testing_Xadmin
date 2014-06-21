@@ -3,14 +3,16 @@ from django.db import models
 from django.contrib.auth.models import User
 #from DjangoUeditor.models import UEditorField
 import datetime
+
 # Create your models here
+
 
 class Kuaijian(models.Model):
             b=((u'已送达',u'已送达'),(u'未送达',u'未送达'))
             delivered=models.CharField(u'送达情况',max_length=20,choices=b,default=u'未送达')
             f=((u'已代取',u'已代取'),(u'未代取',u'未代取'))
             bought=models.CharField(u'代取情况',max_length=20,choices=f,default=u'未代取')
-            a=((u'圆通',u'圆通'),(u'EMS',u'EMS'),(u'汇通',u'汇通'),(u'申通',u'申通'),(u'圆通',u'圆通'),(u'顺丰',u'顺丰'))
+            a=((u'圆通',u'圆通'),(u'EMS',u'EMS'),(u'汇通',u'汇通'),(u'申通',u'申通'),(u'圆通',u'圆通'),(u'顺丰',u'顺丰'),(u'邮政小包',u'邮政小包'),(u'韵达',u'韵达'),(u'天天快递',u'天天快递'))
             express=models.CharField(u'快递公司',max_length=100,choices=a,default=u'申通')
             c=((u'服务中心',u'服务中心'),(u'北门',u'北门'),(u'南门',u'南门'))
             sourcePosition=models.CharField(u'取货地点',max_length=20,choices=c,default=u'服务中心')
@@ -21,16 +23,18 @@ class Kuaijian(models.Model):
             getBeginTime=models.DateTimeField(u'快件代取时间(开始)',default=datetime.datetime.now)
             getEndTime=models.DateTimeField(u'快件代取时间(结束)')
             h=((u'当日',u'当日'),(u'两天内',u'两天内'),(u'三天内',u'三天内'))
-            deadLine=models.CharField(u'快件配送期限',max_length=20,choices=h,default=u'当日')
+            deadLine=models.CharField(u'快件配送期限',max_length=20,choices=h,default=u'当日',help_text="从创建快件需求的时间开始计时Please use the following format: <em>YYYY-MM-DD</em>.")
             #postBeginTime=models.DateTimeField(u'快件送货时间(开始)')
             #postEndTime=models.DateTimeField(u'快件送货时间(结束)')
             #bianhao=models.CharField(max_length=30,unique=True)
             d=((u'小于1公斤重',u'小于1公斤重'),(u'小于5公斤重',u'小于5公斤重'),(u'小于10公斤重',u'小于10公斤重'),(u'小于50公斤重',u'小于50公斤重'))
-            goodsWeight=models.CharField(u'快件重量',max_length=50,choices=d,default='小于1公斤重',blank=True)
+            goodsWeight=models.CharField(u'快件重量',max_length=50,choices=d,default='小于1公斤重',blank=True,help_text=u"代取小费参考价：起步价1元，每公斤增加0.5元")
             e=((u'信件',u'信件'),(u'书籍',u'书籍'),(u'衣服',u'衣服'),(u'鞋子',u'鞋子'),(u'其他',u'其他'))
             goodsVariety=models.CharField(u'快件种类',max_length=50,choices=e,default='信件',blank=True)
             message=models.TextField(u'备注',blank=True)
             upTime=models.DateTimeField(u'上传时间',auto_now_add=True)
+            #,error_messages={'required': '别这么小气嘛，不给小费人家怎么给你送嘛'}
+            tip=models.CharField(max_length=20)
             
             def __unicode__(self):
                 return ("%s--- %s"%(self.name,self.upTime))
