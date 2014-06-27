@@ -1,6 +1,7 @@
 #-*- coding: UTF-8 -*- 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 #from DjangoUeditor.models import UEditorField
 import datetime
 
@@ -8,6 +9,7 @@ import datetime
 
 
 class Kuaijian(models.Model):
+            created_by = models.ForeignKey(User,verbose_name=_('user'),related_name='kuaijian')
             b=((u'已送达',u'已送达'),(u'未送达',u'未送达'))
             delivered=models.CharField(u'送达情况',max_length=20,choices=b,default=u'未送达')
             f=((u'已代取',u'已代取'),(u'未代取',u'未代取'))
@@ -19,7 +21,6 @@ class Kuaijian(models.Model):
             destinationPosition=models.CharField(u'送货地点',max_length=500)
             name=models.CharField(u'收件人名字 ',max_length=200,blank=True)
             #upUser=models.ForeignKey(User)
-            created_by = models.ForeignKey(User,verbose_name=u'发布人')
             getBeginTime=models.DateTimeField(u'快件代取时间(开始)',default=datetime.datetime.now)
             getEndTime=models.DateTimeField(u'快件代取时间(结束)')
             h=((u'当日',u'当日'),(u'两天内',u'两天内'),(u'三天内',u'三天内'))

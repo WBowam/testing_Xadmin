@@ -38,15 +38,16 @@ class MyProfile(UserenaBaseProfile):
     gender = models.PositiveSmallIntegerField(_('gender'),choices=GENDER_CHOICES,blank=True,null=True)
     date_joined=models.DateTimeField(u'注册时间',auto_now_add=True)
     real_name=models.CharField(u'真实姓名',max_length=100)
+    phone = models.CharField(max_length=11,blank=True,validators=[RegexValidator(regex='^\d{11}$', message='请输入正确的手机号', code='Invalid number')])
+    one_card=StdImageField(u'一卡通',upload_to='onecard', variations={'thumbnail': (100, 75)},blank=True) # creates a thumbnail resized to maximum size to fit a 100x75 area
     #major=models.CharField(u'专业',max_length=100,blank=True)
     #address=models.ForeignKey(ReceiveAddress,verbose_name=u'收货地址',related_name='my_profile',help_text=u"目前只支持华电二校范围")
     #address=models.CharField(u'住址',max_length=100,blank=True)
     #phone=models.PositiveSmallIntegerField()
-    phone = models.CharField(max_length=11,blank=True,validators=[RegexValidator(regex='^\d{11}$', message='请输入正确的手机号', code='Invalid number')])
     #identity_card=models.CharField(u'身份证',max_length=100,blank=True)
    # student_number=models.CharField(u'学号',max_length=100,blank=True)
     #one_card=models.FileField(u'一卡通',null=True,blank=True,upload_to='onecard')
-    one_card=StdImageField(u'一卡通',upload_to='onecard', variations={'thumbnail': (100, 75)},blank=True) # creates a thumbnail resized to maximum size to fit a 100x75 area
+    
 
     def image_img(self):
         if self.one_card:
